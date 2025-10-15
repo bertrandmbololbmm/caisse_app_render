@@ -3,7 +3,4 @@ Flask-Login==0.6.3
 Flask-SQLAlchemy==3.1.1
 python-dotenv==1.0.1
 gunicorn==21.2.0
-pandas==2.2.2
-numpy==2.0.2
-Werkzeug==3.0.3
-pdfkit==1.0.0
+pandas==2.1.4
