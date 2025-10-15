@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}{% block content %}
+<div class="row justify-content-center"><div class="col-md-6">
+<h3>Créer un compte</h3>
+{% if invite %}<p class="text-muted">Inscription via invitation (rôle prévu : <b>{{ role }}</b>)</p>{% endif %}
+<form method="post">
+  <div class="mb-2"><label class="form-label">Nom</label><input name="name" class="form-control" required></div>
+  <div class="mb-2"><label class="form-label">Email</label><input name="email" class="form-control" required></div>
+  <div class="mb-3"><label class="form-label">Mot de passe</label><input type="password" name="password" class="form-control" required></div>
+  <button class="btn btn-primary">S'inscrire</button>
+  <a class="btn btn-link" href="{{ url_for('login') }}">Déjà inscrit ?</a>
+</form>
+</div></div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}{% block content %}
+<h3>Tendance mensuelle</h3>
+<canvas id="chart" height="120"></canvas>
+<script>
+fetch('{{ url_for("api_monthly") }}').then(r=>r.json()).then(d=>{
+  const ctx=document.getElementById('chart');
+  new Chart(ctx,{type:'bar',data:{labels:d.labels,datasets:[
+    {label:'Net',data:d.net},{label:'Entrées',data:d.entree},{label:'Ventes',data:d.vente},{label:'Dépenses',data:d.depense}]},
+    options:{responsive:true,scales:{y:{beginAtZero:true}}}});
+});
+</script>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}{% block content %}
+<h3>Rapports</h3>
+<div class="row">
+  <div class="col-md-3"><div class="card"><div class="card-body">Total Entrées <h4>{{ '%.0f'|format(summary.entree) }}</h4></div></div></div>
+  <div class="col-md-3"><div class="card"><div class="card-body">Total Ventes <h4>{{ '%.0f'|format(summary.vente) }}</h4></div></div></div>
+  <div class="col-md-3"><div class="card"><div class="card-body">Total Dépenses <h4>{{ '%.0f'|format(summary.depense) }}</h4></div></div></div>
+  <div class="col-md-3"><div class="card"><div class="card-body">Solde <h4>{{ '%.0f'|format(summary.solde) }}</h4></div></div></div>
+</div>
+<p class="mt-3 text-muted">Astuce : utilisez le Journal + Export CSV/PDF pour extraire des périodes spécifiques.</p>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}{% block content %}
+<h3>Catégories</h3>
+<form class="row g-2 mb-3" method="post">
+  <div class="col-md-6"><input class="form-control" name="name" placeholder="ex: loyer" required></div>
+  <div class="col-md-3"><button class="btn btn-primary">Ajouter</button></div>
+</form>
+<table class="table table-sm"><thead><tr><th>Nom</th><th></th></tr></thead><tbody>
+{% for c in cats %}
+<tr><td>{{ c.name }}</td><td>
+<form method="post" action="{{ url_for('category_delete', cat_id=c.id) }}" onsubmit="return confirm('Supprimer ?')">
+<button class="btn btn-sm btn-outline-danger">Supprimer</button></form></td></tr>
+{% endfor %}
+</tbody></table>
+{% endblock %}

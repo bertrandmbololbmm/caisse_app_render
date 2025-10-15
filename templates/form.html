@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}{% block content %}
+<h3>{{ 'Modifier' if op else 'Ajouter' }} une opération</h3>
+<form method="post" class="row g-3">
+  <div class="col-md-2"><label class="form-label">Date</label><input type="date" name="date" value="{{ (op.date if op else none) or '' }}" class="form-control" required></div>
+  <div class="col-md-2"><label class="form-label">Type</label>
+    <select name="type" class="form-select" id="typeSelect">
+      {% set t = op.type if op else 'entree' %}
+      <option value="entree" {{ 'selected' if t=='entree' }}>Entrée</option>
+      <option value="depense" {{ 'selected' if t=='depense' }}>Dépense</option>
+      <option value="vente" {{ 'selected' if t=='vente' }}>Vente</option>
+    </select>
+  </div>
+  <div class="col-md-4"><label class="form-label">Libellé</label><input name="label" class="form-control" value="{{ op.label if op else '' }}" required></div>
+  <div class="col-md-4">
+    <label class="form-label">Catégorie</label>
+    <select name="category_id" class="form-select">
+      <option value="">(optionnel)</option>
+      {% for c in cats %}<option value="{{ c.id }}" {{ 'selected' if (op and op.category_id==c.id) }}>{{ c.name }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3 vente-only"><label class="form-label">Désignation</label><input name="designation" class="form-control" value="{{ op.designation if op else '' }}"></div>
+  <div class="col-md-2 vente-only"><label class="form-label">Quantité</label><input name="quantity" type="number" class="form-control" value="{{ op.quantity if op else '' }}"></div>
+  <div class="col-md-2 vente-only"><label class="form-label">PU</label><input name="unit_price" type="number" step="0.01" class="form-control" value="{{ op.unit_price if op else '' }}"></div>
+  <div class="col-md-2"><label class="form-label">Montant</label><input name="amount" type="number" step="0.01" class="form-control" value="{{ op.amount if op else '' }}" placeholder="auto si vente"></div>
+  <div class="col-md-12"><label class="form-label">Note</label><textarea name="note" class="form-control">{{ op.note if op else '' }}</textarea></div>
+  <div class="col-12">
+    <button class="btn btn-primary">{{ 'Enregistrer' if op else 'Ajouter' }}</button>
+    <a class="btn btn-secondary" href="{{ url_for('journal') }}">Annuler</a>
+  </div>
+</form>
+<script>
+  function toggleVente(){const t=document.getElementById('typeSelect').value;
+    document.querySelectorAll('.vente-only').forEach(el=>{el.style.display=(t==='vente')?'block':'none';});}
+  document.getElementById('typeSelect').addEventListener('change', toggleVente); toggleVente();
+</script>
+{% endblock %}

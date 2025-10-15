@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}{% block content %}
+<h3>Utilisateurs & Invitations</h3>
+<h5>Utilisateurs</h5>
+<table class="table table-sm"><thead><tr><th>ID</th><th>Nom</th><th>Email</th><th>Rôle</th></tr></thead><tbody>
+{% for u in users %}<tr><td>{{u.id}}</td><td>{{u.name}}</td><td>{{u.email}}</td><td>{{u.role}}</td></tr>{% endfor %}
+</tbody></table>
+
+<h5>Invitations</h5>
+<p>
+  <a class="btn btn-primary btn-sm" href="{{ url_for('admin_invite_create', role='viewer') }}">Nouveau lien Viewer</a>
+  <a class="btn btn-secondary btn-sm" href="{{ url_for('admin_invite_create', role='editor') }}">Nouveau lien Editor</a>
+</p>
+<table class="table table-sm"><thead><tr><th>Token</th><th>Rôle</th><th>Expire</th><th>Utilisé</th></tr></thead><tbody>
+{% for i in invites %}<tr><td>{{ i.token }}</td><td>{{ i.role }}</td><td>{{ i.expires_at }}</td><td>{{ 'oui' if i.used else 'non' }}</td></tr>{% endfor %}
+</tbody></table>
+<p class="text-muted">Après création, récupérez l'URL d'invitation dans le message vert en haut.</p>
+{% endblock %}
