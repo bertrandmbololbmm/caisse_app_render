@@ -1,4 +1,4 @@
-Flask==3.0.3
-gunicorn
-pandas
-openpyxl
+Flask==2.3.2
+gunicorn==21.2.0
+python-dotenv==1.0.0
+pandas==2.1.1
